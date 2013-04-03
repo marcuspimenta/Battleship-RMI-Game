@@ -2,8 +2,6 @@ package com.battleship.business;
 
 import java.awt.Color;
 
-import javax.swing.JOptionPane;
-
 import com.battleship.components.Component;
 import com.battleship.manager.IManager.OnManagerOnMessageListener;
 import com.battleship.manager.IManager.OnManagerPrintMsgConsole;
@@ -111,8 +109,9 @@ public class BusinessLogic implements OnManagerOnMessageListener,
 					}
 				}else{
 					sendCommand(command.formCommand(ActionCommand.WIN_GAME.getActionCommand(), new byte[]{0}));
-					JOptionPane.showMessageDialog(windowBuilder.getContentPane(), "You lost the game. Search a new opponent.", "OK", 1);
 					windowBuilder.quitGame();
+					closeCommunication();
+					windowBuilder.printMsgDisplay("You lost the game\nSearch a new opponent");
 				}
 				
 			}else{
@@ -135,14 +134,15 @@ public class BusinessLogic implements OnManagerOnMessageListener,
 			}
 			
 		}else if(actionCommand == ActionCommand.WIN_GAME.getActionCommand()){
-			JOptionPane.showMessageDialog(windowBuilder.getContentPane(), "Congratulations! You won the game. Search a new opponent.", "OK", 1);
 			windowBuilder.quitGame();
+			closeCommunication();
+			windowBuilder.printMsgDisplay("Congratulations! You won the game\nSearch a new opponent");
 			
 		}else if(actionCommand == ActionCommand.LOST_PLAY.getActionCommand()){
 			increaseResponsePlay();
 		}else if (actionCommand == ActionCommand.ABORT_GAME.getActionCommand()){
-			managerRMIServer.unbind();
 			closeCommunication();
+			windowBuilder.printMsgDisplay("Your opponents abort the game");
 		}else {
 			windowBuilder.printMsgDisplay("Invalid message");
 		}
@@ -172,15 +172,13 @@ public class BusinessLogic implements OnManagerOnMessageListener,
 				startClient();
 				break;
 			
-			case CLOSE_COMMUNICATION:
-				moves_sent = 0;
-				responses_receiver = 0;
-				
+			case QUIT_GAME:
 				if(managerRMIClient != null){
-					sendCommand(command.formCommand(ActionCommand.ABORT_GAME.getActionCommand(), (new String("").getBytes())));
+					sendCommand(command.formCommand(ActionCommand.ABORT_GAME.getActionCommand(), new byte[]{0}));
 				}
-				managerRMIServer.unbind();
+				
 				closeCommunication();
+				windowBuilder.printMsgDisplay("You abort the game");
 				break;
 		}
 	}
@@ -196,9 +194,12 @@ public class BusinessLogic implements OnManagerOnMessageListener,
 	}
 	
 	private void closeCommunication(){
+		moves_sent = 0;
+		responses_receiver = 0;
+		
+		managerRMIServer.unbind();
 		managerRMIClient.stopVerify();
 		managerRMIClient = null;
-		managerRMIServer.unbind();
 	}
 
 }

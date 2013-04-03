@@ -42,6 +42,7 @@ public class WindowBuilder extends JFrame implements ActionListener{
 
 	public static String urlServer;
 	public static String urlYourServer;
+	public static String numberPort;
 	
 	private Square[][] squareSecondary;
 	
@@ -156,6 +157,7 @@ public class WindowBuilder extends JFrame implements ActionListener{
 		confEnableButtonsMenu(true);
 		
 		enterUrlServer();
+		numberPort();
 	}
 	
 	private void enterUrlServer() {
@@ -165,6 +167,17 @@ public class WindowBuilder extends JFrame implements ActionListener{
 			urlYourServer = JOptionPane.showInputDialog(getContentPane().getParent(),
 												   		"Enter url your server:", 
 												   		"Settings url your server",
+												   		JOptionPane.QUESTION_MESSAGE);
+		}
+	}
+	
+	private void numberPort() {
+		numberPort = "";
+		
+		while(numberPort == null || (numberPort != null && !numberPort.matches("[0-9]+") && numberPort.trim().equals(""))){
+			  numberPort = JOptionPane.showInputDialog(getContentPane().getParent(),
+												   		"Enter number port:", 
+												   		"Settings number port server",
 												   		JOptionPane.QUESTION_MESSAGE);
 		}
 	}
@@ -242,6 +255,7 @@ public class WindowBuilder extends JFrame implements ActionListener{
 		
 		}else if(event.getSource() == menuQuitGame){
 			quitGame();
+			actionsCallback.onActionSelected(Action.QUIT_GAME);
 		}
 	}
 	
@@ -260,8 +274,6 @@ public class WindowBuilder extends JFrame implements ActionListener{
 		
 		reseatBoard();
 		board.repaintBoard();
-		
-		actionsCallback.onActionSelected(Action.CLOSE_COMMUNICATION);
 	}
 	
 	public void printMsgDisplay(final String message){

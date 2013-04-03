@@ -4,6 +4,7 @@ import java.rmi.RemoteException;
 
 import com.battleship.manager.IManager.OnManagerOnMessageListener;
 import com.battleship.rmi.RMIServer;
+import com.battleship.view.WindowBuilder;
 
 /**
  * 
@@ -30,7 +31,7 @@ public class ManagerRMIServer {
 	}
 	
 	public void createRegistry(){
-		rmiServer.createRegistry(1090);
+		rmiServer.createRegistry(new Integer(WindowBuilder.numberPort));
 	}
 	
 	public void rebind(){
