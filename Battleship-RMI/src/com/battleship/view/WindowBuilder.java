@@ -174,7 +174,7 @@ public class WindowBuilder extends JFrame implements ActionListener{
 	private void numberPort() {
 		numberPort = "";
 		
-		while(numberPort == null || (numberPort != null && !numberPort.matches("[0-9]+") && numberPort.trim().equals(""))){
+		while(numberPort == null || (numberPort != null && (!numberPort.matches("[0-9]+") || numberPort.trim().equals("")))){
 			  numberPort = JOptionPane.showInputDialog(getContentPane().getParent(),
 												   		"Enter number port:", 
 												   		"Settings number port server",
@@ -229,7 +229,7 @@ public class WindowBuilder extends JFrame implements ActionListener{
 										  "BattleShip Game\n\n" +
 										  "Autor:        Marcus Pimenta\n" +
 										  "email:        mvinicius.pimenta@gmail.com\n" +
-										  "Data: 		         abril 02, 2013",
+										  "Data: 		         april 02, 2013",
 										  "Sobre BattleShip", JOptionPane.PLAIN_MESSAGE);
 			
 		}else if(event.getSource() == menuExit){
