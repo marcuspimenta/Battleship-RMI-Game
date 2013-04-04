@@ -10,7 +10,7 @@ Start the game the user enter the name and port of your server.
 <p align="center"> <img src="imagens/settgins_number_port.png"/> </p> 
 
 The user can start game accessing the menu Options, a window appears for the user enter the name server opponents.
-<p align="center"> <img src="imagens/settgins_server.png"/> </p>
+<p align="center"> <img src="imagens/settgins_server_opponents.png"/> </p>
 
 Each player can play three times in a game. When the player hits an opponent's piece this piece change color for red, if you miss the 
 opponent's piece this piece change color for blue. Each movement was a message informing that the piece was hit, is also informed if 
