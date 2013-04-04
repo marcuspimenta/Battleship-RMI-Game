@@ -165,7 +165,7 @@ public class WindowBuilder extends JFrame implements ActionListener{
 		
 		while(urlYourServer == null || (urlYourServer != null && urlYourServer.trim().equals(""))){
 			urlYourServer = JOptionPane.showInputDialog(getContentPane().getParent(),
-												   		"Enter url your server:", 
+												   		"Enter url your server (//198.168.1.10/MarcusServer)", 
 												   		"Settings url your server",
 												   		JOptionPane.QUESTION_MESSAGE);
 		}
@@ -242,7 +242,7 @@ public class WindowBuilder extends JFrame implements ActionListener{
 			displayAreaMsg.setText("");
 			
 			urlServer = JOptionPane.showInputDialog(getContentPane().getParent(),
-											   		"Enter the opponent's url:", 
+											   		"Enter the opponent's url (//198.168.1.10/RaulServer)", 
 											   		"Settings opponent's url",
 											   		JOptionPane.QUESTION_MESSAGE);
 			
